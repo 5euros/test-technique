@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set headline = products[0] %}
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 fw-normal">{{ headline.title }}</h1>
+            <p class="lead fw-normal">{{ headline.description|u.truncate(100) }}</p>
+            <p>{{ headline.price|format_currency('EUR') }}</p>
+            <a class="btn btn-outline-secondary" href="{{ path('app_product', {identifier: headline.urlIdentifier}) }}">See it</a>
+        </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+    {% for row in products[1:]|batch(2) %}
+        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+            {% for product in row %}
+                <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+                    <div class="my-3 py-3">
+                        <h2 class="display-5"><a class="text-light text-decoration-none" href="{{ path('app_product', {identifier: product.urlIdentifier}) }}">{{ product.title }}</a></h2>
+                        <p class="lead">{{ product.description|u.truncate(30, '.') }}</p>
+                        <p>{{ product.price|format_currency('EUR') }}</p>
+                    </div>
+                    <div class="bg-light shadow-sm mx-auto"
+                         style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

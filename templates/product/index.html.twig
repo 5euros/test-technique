@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page produit{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-8">
+                <h1>{{ product.title }}</h1>
+                <p>{{ product.createdAt|format_date }}</p>
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
